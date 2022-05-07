@@ -2,30 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
-function Button(props) {
-  const { value } = props;
-  let classes4btn = 'calcBtn';
-  if (value === '0') {
-    classes4btn = 'calcBtn span2';
-  }
-  if (value === '+' || value === 'x' || value === '-' || value === '=') {
-    classes4btn = 'calcBtn orangeBtn';
-  }
-  return (
-    <button className={classes4btn} type="button">
-      {value}
-    </button>
-  );
-}
-
-Button.defaultProps = {
-  value: '-1',
-};
-
-Button.propTypes = {
-  value: PropTypes.string,
-};
+import Button from './Button';
+import calculate from './logic/calculate';
 
 function Output(props) {
   const { result } = props;
@@ -43,39 +21,117 @@ Output.defaultProps = {
 };
 
 Output.propTypes = {
-  result: PropTypes.number,
+  result: PropTypes.string,
 };
 
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
-    this.calculation = 0;
+    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      total: null,
+      next: null,
+      operation: null,
+    };
+  }
+
+  handleClick(value) {
+    const { total, next, operation } = this.state;
+    const calcObj = {
+      total,
+      next,
+      operation,
+    };
+    const newCalcObj = calculate(calcObj, value);
+    this.setState({
+      total: newCalcObj.total,
+      next: newCalcObj.next,
+      operation: newCalcObj.operation,
+    });
   }
 
   render() {
+    const { total } = this.state;
     return (
       <div className="calcContainer">
-        <Output result={0} />
+        <Output result={total} />
         <div className="keysGrid">
-          <Button value="+/-" />
-          <Button value="AC" />
-          <Button value="%" />
-          <Button value="+" />
-          <Button value="7" />
-          <Button value="8" />
-          <Button value="9" />
-          <Button value="x" />
-          <Button value="4" />
-          <Button value="5" />
-          <Button value="6" />
-          <Button value="-" />
-          <Button value="1" />
-          <Button value="2" />
-          <Button value="3" />
-          <Button value="+" />
-          <Button value="0" />
-          <Button value="." />
-          <Button value="=" />
+          <Button
+            value="AC"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="+/-"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="%"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="+"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="7"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="8"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="9"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="x"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="4"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="5"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="6"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="-"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="1"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="2"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="3"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="+"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="0"
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="."
+            handleClick={this.handleClick}
+          />
+          <Button
+            value="="
+            handleClick={this.handleClick}
+          />
         </div>
       </div>
     );

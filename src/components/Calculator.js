@@ -51,10 +51,18 @@ class Calculator extends React.Component {
   }
 
   render() {
-    const { total } = this.state;
+    const { total, next } = this.state;
+    let disp = '';
+    if (next !== null && total === null) {
+      disp = next;
+    } else if (total !== null && next !== null) {
+      disp = next;
+    } else if (next === null && total !== null) {
+      disp = total;
+    }
     return (
       <div className="calcContainer">
-        <Output result={total} />
+        <Output result={disp} />
         <div className="keysGrid">
           <Button
             value="AC"

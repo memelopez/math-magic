@@ -77,7 +77,7 @@ class Calculator extends React.Component {
             handleClick={this.handleClick}
           />
           <Button
-            value="+"
+            value="÷"
             handleClick={this.handleClick}
           />
           <Button

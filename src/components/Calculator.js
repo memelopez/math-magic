@@ -24,7 +24,7 @@ Output.propTypes = {
   result: PropTypes.string,
 };
 
-function Calculator() {
+const Calculator = () => {
   const [state, setState] = useState({ total: null, next: null, operation: null });
 
   const handleClick = (value) => {
@@ -135,6 +135,6 @@ function Calculator() {
       </div>
     </div>
   );
-}
+};
 
 export default Calculator;
